@@ -1,7 +1,7 @@
 package com.example.demo;
 
 public class BodyRequestProva {
-    private Integer a, b,somma;
+    private Integer a, b;
 
     public BodyRequestProva(Integer a, Integer b) {
         this.a = a;
@@ -24,11 +24,5 @@ public class BodyRequestProva {
         this.b = b;
     }
 
-    public Integer getSomma() {
-        return somma;
-    }
 
-    public void setSomma(Integer somma) {
-        this.somma = somma;
-    }
 }
