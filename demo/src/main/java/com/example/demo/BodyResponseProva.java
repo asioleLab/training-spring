@@ -1,7 +1,7 @@
 package com.example.demo;
 
 public class BodyResponseProva {
-    Integer somma;
+    private Integer somma;
 
     public BodyResponseProva(){
 
