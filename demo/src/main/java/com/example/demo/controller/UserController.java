@@ -1,4 +1,4 @@
-package com.example.demo;
+package com.example.demo.controller;
 
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -49,5 +49,18 @@ public class UserController {
         InetSocketAddress host = headers.getHost();
         String url = "http://" + host.getHostName() + ":" + host.getPort();
         return new ResponseEntity<String>(String.format("Base URL = %s", url), HttpStatus.OK);
+    }
+    @GetMapping("/nonRequiredHeader")
+    public ResponseEntity<String>  evaluateNonRequiredHeader(
+            @RequestHeader(value = "optional-header",required = false) String optionalHeader) {
+        return new ResponseEntity<String>(String.format(
+                "Was the optional header present? %s!",
+                (optionalHeader == null ? "No" : "Yes")),HttpStatus.OK);
+    }
+    @GetMapping("/default")
+    public ResponseEntity<String> evaluateDefaultHeaderValue(
+            @RequestHeader(value = "optional-header", defaultValue = "3600") int optionalHeader) {
+        return new ResponseEntity<String>(
+                String.format("Optional Header is %d", optionalHeader), HttpStatus.OK);
     }
 }
