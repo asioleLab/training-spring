@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/survey")
 public class SurveyController {
     @RequestMapping(method = RequestMethod.GET,path = "/getSurvey")
-    private String getSurvey(@RequestParam(required = false) String idSurvey){
-        return "Ciao " + idSurvey + ", io sono una giufetta";
+    private String getSurvey(@RequestParam(required = false, defaultValue = "0") String idSurvey){
+        return idSurvey;
     }
 
 }
