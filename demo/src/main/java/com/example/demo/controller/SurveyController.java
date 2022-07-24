@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import com.example.demo.dto.SurveyDTO;
 import com.example.demo.model.Survey;
 import com.example.demo.service.SurveyService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,8 +24,13 @@ public class SurveyController {
     }
 
     @RequestMapping(method = RequestMethod.GET,path = "/getSurveyByIdSurvey")
-    private Map<String,String> getSurveyByIdSurvey(@RequestParam(required = false, defaultValue = "0") String idSurvey){
+    private SurveyDTO getSurveyByIdSurvey(@RequestParam(required = false, defaultValue = "0") String idSurvey){
         return surveyService.testIdSurvey(idSurvey);
     }
+
+//    @RequestMapping(method = RequestMethod.GET,path = "/getSurveyCompleted")
+//    private Map<String,String> getSurveyCompleted(@RequestParam(required = false, defaultValue = "0") String idSurvey){
+//        return surveyService.(idSurvey);
+//    }
 
 }

@@ -2,6 +2,7 @@ package com.example.demo.service;
 
 //import org.springframework.stereotype.Service;
 
+import com.example.demo.dto.SurveyDTO;
 import com.example.demo.model.Survey;
 import com.example.demo.model.SurveyKeyId;
 import com.example.demo.repository.SurveyRepository;
@@ -16,6 +17,9 @@ public class SurveyService {
     @Autowired
     SurveyRepository surveyRepository;
 
+//    @Autowired
+//    SurveyRepositoryCompleteRepository surveyRepositoryCompleteDAO;
+
     public String test(String surveyId, String questionId){
         SurveyKeyId surveyKeyId=new SurveyKeyId();
         surveyKeyId.setSurveyId(surveyId);
@@ -28,22 +32,29 @@ public class SurveyService {
             return "errore";
         }
     }
-    public Map<String,String> testIdSurvey(String surveyId){
-
+    public SurveyDTO testIdSurvey(String surveyId){
+        SurveyDTO surveyDTO =new SurveyDTO();
         List<Survey> result=surveyRepository.findSurveysByIdSurveyId(surveyId);
         if(!CollectionUtils.isEmpty(result)){
             Map<String,String> questionarioMap = new HashMap<>();
             for (Survey survey : result) {
                 System.out.println("qui "+survey.getAnswerId());
                 if(survey.getId()!=null){
-                    questionarioMap.put(survey.getId().getQuestionId(),survey.getAnswerId());
+                    List<String> risposte=new ArrayList<>();
+                    risposte.add(survey.getAnswerId());
+                    SurveyDTO.SurveyRow surveyRow =new SurveyDTO.SurveyRow(survey.getId().getQuestionId(),risposte);
+//                    questionarioMap.put(survey.getId().getQuestionId(),survey.getAnswerId());
+                        surveyDTO.getBody().add(surveyRow);
                 }
 
             }
-            return questionarioMap;
+//
+//            survey.setBody(questionarioMap);
+            return surveyDTO;
         }else{
-            return Collections.singletonMap("status", "errore");
+            return null;
 //            return Collections.emptyMap();
         }
     }
+
 }
