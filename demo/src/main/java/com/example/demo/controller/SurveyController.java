@@ -1,13 +1,12 @@
 package com.example.demo.controller;
 
+import com.example.demo.*;
 import com.example.demo.dto.SurveyDTO;
 import com.example.demo.model.Survey;
+import com.example.demo.model.SurveyKeyId;
 import com.example.demo.service.SurveyService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 
@@ -27,6 +26,16 @@ public class SurveyController {
     private SurveyDTO getSurveyByIdSurvey(@RequestParam(required = false, defaultValue = "0") String idSurvey){
         return surveyService.testIdSurvey(idSurvey);
     }
+
+    @RequestMapping(method = RequestMethod.POST,path = "/postSurveyByIdSurvey",consumes = "application/json",produces="application/json")
+    private @ResponseBody
+    SurveyDTO surveyResponse(@RequestBody SurveyBodyRequest surveyBodyRequest){
+        SurveyBodyResponse surveyBodyResponse= new SurveyBodyResponse();
+        String idSurvey=surveyBodyRequest.getSurveyId();
+        System.out.println(surveyBodyResponse);
+        return surveyService.testIdSurvey(idSurvey);
+    }
+
 
 //    @RequestMapping(method = RequestMethod.GET,path = "/getSurveyCompleted")
 //    private Map<String,String> getSurveyCompleted(@RequestParam(required = false, defaultValue = "0") String idSurvey){
