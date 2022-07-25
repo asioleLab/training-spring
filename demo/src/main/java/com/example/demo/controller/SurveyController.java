@@ -2,13 +2,10 @@ package com.example.demo.controller;
 
 import com.example.demo.*;
 import com.example.demo.dto.SurveyDTO;
-import com.example.demo.model.Survey;
-import com.example.demo.model.SurveyKeyId;
 import com.example.demo.service.SurveyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Map;
 
 @RestController
 @RequestMapping("/survey")
