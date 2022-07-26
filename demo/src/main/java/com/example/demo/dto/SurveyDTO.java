@@ -1,9 +1,7 @@
 package com.example.demo.dto;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class SurveyDTO {
     public static class SurveyRow{

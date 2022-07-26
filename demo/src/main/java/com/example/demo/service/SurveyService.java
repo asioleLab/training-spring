@@ -2,6 +2,7 @@ package com.example.demo.service;
 
 //import org.springframework.stereotype.Service;
 
+import com.example.demo.dto.SurveyPutDTO;
 import com.example.demo.dto.SurveyDTO;
 import com.example.demo.model.Survey;
 import com.example.demo.model.SurveyKeyId;
@@ -37,11 +38,15 @@ public class SurveyService {
         List<Survey> result=surveyRepository.findSurveysByIdSurveyId(surveyId);
         if(!CollectionUtils.isEmpty(result)){
             Map<String,String> questionarioMap = new HashMap<>();
+
             for (Survey survey : result) {
-                System.out.println("qui "+survey.getAnswerId());
                 if(survey.getId()!=null){
                     List<String> risposte=new ArrayList<>();
-                    risposte.add(survey.getAnswerId());
+
+
+                        risposte.add(survey.getAnswerId());
+
+
                     SurveyDTO.SurveyRow surveyRow =new SurveyDTO.SurveyRow(survey.getId().getQuestionId(),risposte);
 //                    questionarioMap.put(survey.getId().getQuestionId(),survey.getAnswerId());
                         surveyDTO.getBody().add(surveyRow);
@@ -57,4 +62,19 @@ public class SurveyService {
         }
     }
 
+
+    public SurveyPutDTO addRow(SurveyPutDTO surveyPutDTO){
+
+        Survey survey=new Survey();
+        SurveyKeyId surveyKeyId=new SurveyKeyId();
+        surveyKeyId.setSurveyId(surveyPutDTO.getIdSurvey());
+        surveyKeyId.setQuestionId(surveyPutDTO.getDomanda());
+        survey.setId(surveyKeyId);
+        survey.setAnswerId(surveyPutDTO.getRisposta());
+
+        surveyRepository.save(survey);
+        System.out.println(surveyRepository);
+//        surveyRepository.map(save(surveyId,question,answer);
+        return surveyPutDTO;
+    }
 }

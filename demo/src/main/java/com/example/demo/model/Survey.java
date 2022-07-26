@@ -1,8 +1,6 @@
 package com.example.demo.model;
 
 
-import com.example.demo.model.SurveyKeyId;
-
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
